@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <v-container fluid>
       <v-carousel>
         <v-carousel-item
@@ -42,19 +42,29 @@
               <v-btn
                 tile
                 :to="'/ad/' + ad.id"
+                class="ma-2"
               >
                 Open
               </v-btn>
-              <v-btn
-                raised
-                color="primary"
-              >
-                Buy
-              </v-btn>
+              <app-buy-modal :ad="ad"></app-buy-modal>
             </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
+    </v-container>
+  </div>
+  <div v-else>
+    <v-container>
+      <v-layout row>
+        <v-flex xs12 class="text-center pt-5">
+          <v-progress-circular
+            :size="120"
+            :width="4"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
+        </v-flex>
+      </v-layout>
     </v-container>
   </div>
 </template>
@@ -67,6 +77,9 @@ export default {
     },
     ads () {
       return this.$store.getters.ads
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
@@ -76,7 +89,7 @@ export default {
     position: absolute;
     bottom: 50px;
     left: 50%;
-    background: rgba(0, 0, 0, .2);
+    background: rgba(0, 0, 0, .3);
     transform: translate(-50%, 0);
     padding: 5px 15px;
     border-top-right-radius: 5px;

@@ -80,9 +80,6 @@
           </v-btn>
         </v-snackbar>
       </template>
-      <v-footer app>
-        <!-- -->
-      </v-footer>
     </v-app>
 </template>
 
