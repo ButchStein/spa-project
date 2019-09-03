@@ -1,7 +1,7 @@
 <template>
   <v-dialog width="500" v-model="modal">
     <template v-slot:activator="{ on }">
-      <v-btn class="warning" v-on="on">Edit</v-btn>
+      <v-btn class="warning" v-on="on" v-if="isUser && isOwner">Edit</v-btn>
     </template>
     <v-card>
       <v-container>
@@ -53,6 +53,14 @@ export default {
       modal: false,
       editedTitle: this.ad.title,
       editedDescription: this.ad.description
+    }
+  },
+  computed: {
+    isOwner () {
+      return this.ad.owner === this.$store.getters.user.id
+    },
+    isUser () {
+      return this.$store.getters.user !== null
     }
   },
   methods: {

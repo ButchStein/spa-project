@@ -10,7 +10,7 @@
          </v-card-text>
          <v-card-actions>
            <v-spacer></v-spacer>
-           <add-edit-ad-modal :ad="ad" v-if="isOwner"></add-edit-ad-modal>
+           <app-edit-ad-modal :ad="ad"></app-edit-ad-modal>
            <app-buy-modal :ad="ad"></app-buy-modal>
          </v-card-actions>
        </v-card>
@@ -29,7 +29,6 @@
 
 <script>
 import EditAdModal from './EditAdModal'
-
 export default {
   props: ['id'],
   computed: {
@@ -39,13 +38,10 @@ export default {
     },
     loading () {
       return this.$store.getters.loading
-    },
-    isOwner () {
-      return this.ad.owner === this.$store.getters.user.id
     }
   },
   components: {
-    addEditAdModal: EditAdModal
+    appEditAdModal: EditAdModal
   }
 }
 </script>
